@@ -5,19 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ewutu (Senya) Dictionary</title>
   <style>
-    * { box-sizing: border-box; font-family: Arial, sans-serif; }
-    body { max-width: 600px; margin: 0 auto; padding: 20px; background: #f8fafc; color: #1e293b; }
-    h1 { text-align: center; margin-bottom: 20px; color: #0f172a; }
+    * { box-sizing: border-box; font-family: sans-serif; }
+    body { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+    h1 { text-align: center; margin-bottom: 20px; }
     .search-box { display: flex; gap: 10px; margin-bottom: 20px; }
-    input { flex: 1; padding: 12px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 16px; outline: none; }
-    button { padding: 12px 20px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
-    .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-    .word { font-size: 24px; font-weight: bold; color: #1e40af; margin-bottom: 5px; }
-    .def { font-size: 16px; line-height: 1.5; margin-top: 10px; }
+    input { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
+    button { padding: 12px 20px; background: #0056b3; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; }
+    .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .word { font-size: 24px; font-weight: bold; color: #0056b3; margin-bottom: 8px; text-transform: capitalize; }
+    .def { font-size: 16px; line-height: 1.5; color: #333; }
   </style>
 </head>
 <body>
+
   <h1>Ewutu Dictionary</h1>
+
   <div class="search-box">
     <input type="text" id="searchInput" placeholder="Type a word to search...">
     <button onclick="searchWord()">Search</button>
@@ -29,16 +31,29 @@
   </div>
 
   <script>
-    function searchWord() {
-      const input = document.getElementById('searchInput').value.trim();
-      const card = document.getElementById('resultCard');
-      if (!input) return;
+    const dictionary = {
+      "go": "wɔ",
+      "water": "nsu",
+      "food": "elutɔ"
+    };
 
-      card.innerHTML = `
-        <div class="word">${input}</div>
-        <div class="def">Definition placeholder for "${input}". We will add real words next!</div>
-      `;
+    function searchWord() {
+      const input = document.getElementById('searchInput').value.toLowerCase().trim();
+      const card = document.getElementById('resultCard');
+      
+      if (dictionary[input]) {
+        card.innerHTML = `
+          <div class="word">${input}</div>
+          <div class="def">${dictionary[input]}</div>
+        `;
+      } else {
+        card.innerHTML = `
+          <div class="word">Not Found</div>
+          <div class="def">This word is not in the dictionary yet.</div>
+        `;
+      }
     }
   </script>
+
 </body>
 </html>
